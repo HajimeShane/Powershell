@@ -1,0 +1,26 @@
+$Computers = Get-Content C:\Powershell\ping.txt
+
+#Method1
+foreach ($computer in $Computers) {
+if (Test-Connection -ComputerName $computers -count 1 $true){
+    $computers >> C:\powershell\pingfail.txt
+    }
+else {
+    $computers >> C:\Powershell\pingpass.txt
+    }
+}
+
+#Method2
+foreach ($computer in $Computers) {
+    try {
+        Test-Connection -ComputerName $computers -count 1
+        }
+
+        
+
+    catch [System.Exception]
+    { 
+        $_.Exception.Message >> C:\powershell\pingfail.txt
+    }
+        $Computers >> C:\Powershell\pingpass.txt
+}
